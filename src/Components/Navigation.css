@@ -1,0 +1,63 @@
+/* NavigationBar.css */
+*{
+    padding: 0;
+    margin: 1px 3px;
+    box-sizing: border-box;
+  }
+  .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #333;
+      color: white;
+      padding: 10px 20px;
+    }
+    
+    .left-section {
+      display: flex;
+      align-items: center;
+    }
+    
+    .stockCompany {
+      text-decoration: none;
+      font-size: 1.5rem;
+      color: white;
+    }
+    
+    .search-section {
+      flex-grow: 1;
+      display: flex;
+      align-items: center;
+    }
+    
+    .search-input {
+      width: 80%;
+      padding: 8px;
+      border: none;
+      border-radius: 5px;
+      margin-right: 10px;
+      margin-left: 10px;
+    }
+    
+    .search-button {
+      background-color: rgb(9, 52, 192);
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 8px 15px;
+      cursor: pointer;
+    }
+    
+    .right-section {
+      display: flex;
+      align-items: center;
+    }
+    
+    .right-section a {
+      text-decoration: none;
+      color: white;
+      margin: 0 10px;
+    }
+    
+    /* Add additional styling as needed */
+    
