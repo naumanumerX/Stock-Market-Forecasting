@@ -6,7 +6,7 @@ const callApi = async (stockSymbol, api_key, setStockData) => {
   try {
     // const response = await axios.get(`https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=&outputsize=compact&apikey=${api_key}`);
    
-    const  response=await axios.get(`https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${stockSymbol}&outputsize=compact&apikey=${api_key}`)
+    const  response=await axios.get(`https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${stockSymbol}.LON&outputsize=compact&apikey=${api_key}`)
    console.log(response.data)
     setStockData(response.data["Time Series (Daily)"]);
   } catch (error) {
@@ -20,19 +20,20 @@ const formatDate = (rawDate) => {
   return date.toLocaleDateString(undefined, options);
 };
 
-const HistoricalData = ({stockData, setStockData}) => {
+const HistoricalData = ({stockData, setStockData,startDate,customDays=15}) => {
  
-  const stockSymbol = 'AAPL';
+  const stockSymbol = 'LLOY';
   const api_key = 'WVA7522VPWWOJAVA';
 
   useEffect(() => {
     callApi(stockSymbol, api_key, setStockData);
-  }, [stockSymbol]);
-
+  }, [stockSymbol,customDays]);
+console.log(customDays)
   return (
     <>
       <div>Historical data</div>
-
+     
+     
       <table>
         <tr>
           <th>Date</th>
@@ -42,8 +43,8 @@ const HistoricalData = ({stockData, setStockData}) => {
           <th>Close</th>
           <th>Volume</th>
         </tr>
-
-        {stockData && Object.entries(stockData).slice(0,15).map(([date, data], index) => (
+      
+        {stockData && Object.entries(stockData).slice(0,customDays).map(([date, data], index) => (
           <tr key={index}>
             <td>{formatDate(date)}</td>
             <td>{data["1. open"]}</td>
