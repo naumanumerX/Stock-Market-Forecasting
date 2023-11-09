@@ -1,8 +1,9 @@
 import React, { useMemo } from 'react';
 import ReactApexChart  from "react-apexcharts";
 import { candleStickOptions } from './CandleStickChartOptions';
+import './CandleStick.css'
 
-const CandleStick = ({ stockData,stockSymbol }) => {
+const CandleStick = ({ stockData,stockSymbol,customDays }) => {
 
     const candleStickData=[];
   if (!stockData) {
@@ -14,7 +15,7 @@ const CandleStick = ({ stockData,stockSymbol }) => {
   }
 
   
-  Object.entries(stockData).slice(0,30).map(([date,value]) => {
+  Object.entries(stockData).slice(0,customDays).map(([date,value]) => {
    // console.log("data is ",date ,"values is ",value["1. open"]);
     candleStickData.push({
         x:date,
@@ -35,8 +36,10 @@ const CandleStick = ({ stockData,stockSymbol }) => {
  
   return (
     <>
+    <div className="chart-component">
       <h3 style={{textAlign:"center"}}><u>Chart </u></h3>
 
+      <div className="chart">
       <ReactApexChart 
       series ={
 
@@ -49,8 +52,10 @@ const CandleStick = ({ stockData,stockSymbol }) => {
       
       options={candleStickOptions(stockSymbol)}
       type="candlestick"
-      width="100%" height="50%"
+      style={{ width:"100%", height:"100%"}}
       />
+      </div>
+    </div>
 
 
 
