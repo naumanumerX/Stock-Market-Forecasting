@@ -1,18 +1,21 @@
 
 import dayjs from "dayjs"
-export const candleStickOptions={
+export const candleStickOptions=(stockSymbol)=>{
+
+  return {
     chart: {
-      height: 350,
-      type: 'candlestick',
+      
+      //height: '200px' , 
+      type: 'candlestick'
     },
     title: {
-      text: 'CandleStick Chart - Category X-axis',
+      text: `CandleStick Chart - ${stockSymbol}`,
       align: 'left'
     },
     annotations: {
       xaxis: [
         {
-          x: 'Oct 06 14:00',
+          x: 'Nov 07 14:00',
           borderColor: '#00E396',
           label: {
             borderColor: '#00E396',
@@ -44,4 +47,5 @@ export const candleStickOptions={
         enabled: true
       }
     }
+  }
   }
