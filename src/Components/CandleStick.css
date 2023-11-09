@@ -1,0 +1,11 @@
+.chart-component {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 30px auto;
+}
+.chart-component .chart {
+  width: 50%;
+  margin: 20px 0px;
+}
