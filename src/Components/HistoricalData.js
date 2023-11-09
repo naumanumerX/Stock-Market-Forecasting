@@ -20,17 +20,18 @@ const formatDate = (rawDate) => {
   return date.toLocaleDateString(undefined, options);
 };
 
-const HistoricalData = ({stockData, setStockData,startDate,customDays=15}) => {
+const HistoricalData = ({stockSymbol,stockData, setStockData,startDate,customDays=15}) => {
  
-  const stockSymbol = 'LLOY';
+  // const stockSymbol = 'LLOY';
   const api_key = 'WVA7522VPWWOJAVA';
 
   useEffect(() => {
     callApi(stockSymbol, api_key, setStockData);
   }, [stockSymbol,customDays]);
-console.log(customDays)
+//console.log(customDays)
   return (
     <>
+    <div className="historical-data-component">
       <div>Historical data</div>
      
      
@@ -43,7 +44,7 @@ console.log(customDays)
           <th>Close</th>
           <th>Volume</th>
         </tr>
-      
+      {customDays}
         {stockData && Object.entries(stockData).slice(0,customDays).map(([date, data], index) => (
           <tr key={index}>
             <td>{formatDate(date)}</td>
@@ -58,6 +59,7 @@ console.log(customDays)
 
 
       </table>
+      </div>
     </>
   );
 }
