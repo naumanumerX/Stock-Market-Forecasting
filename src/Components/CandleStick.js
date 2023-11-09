@@ -1,7 +1,8 @@
 import React, { useMemo } from 'react';
 import ReactApexChart  from "react-apexcharts";
 import { candleStickOptions } from './CandleStickChartOptions';
-const CandleStick = ({ stockData }) => {
+
+const CandleStick = ({ stockData,stockSymbol }) => {
 
     const candleStickData=[];
   if (!stockData) {
@@ -34,7 +35,7 @@ const CandleStick = ({ stockData }) => {
  
   return (
     <>
-      <h3>Chart component</h3>
+      <h3 style={{textAlign:"center"}}><u>Chart </u></h3>
 
       <ReactApexChart 
       series ={
@@ -46,9 +47,28 @@ const CandleStick = ({ stockData }) => {
         ]
       }
       
-      options={candleStickOptions}
+      options={candleStickOptions(stockSymbol)}
       type="candlestick"
+      width="100%" height="50%"
       />
+
+
+
+
+{/* <ReactApexChart 
+      series ={
+
+        [
+            {
+                data:candleStickData[0]
+            }
+        ]
+      }
+      
+      options={zoomableTimeSeries(stockSymbol)}
+      type="area"
+      width="100%" height="50%"
+      /> */}
     </>
   );
 }
