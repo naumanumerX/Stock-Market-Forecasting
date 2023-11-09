@@ -42,10 +42,10 @@ const DataRangePicker = ({range,setRange}) => {
     {open && (
         <DateRange
             onChange={item => setRange([item.selection])}
-            editableDateInputs={true}
+            editableDateInputs={false}
             moveRangeOnFirstSelection={false}
             ranges={range}
-            months={2   }
+            months={1}
             direction='horizontal'
             className='calenderElement'
         />
