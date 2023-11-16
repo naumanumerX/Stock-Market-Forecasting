@@ -17,4 +17,7 @@ input.inputBox {
     top: 40px;
     border: 1px solid #ccc;
     z-index: 999;
+    width: 30px !important; 
+    height: 20px !important; 
   }
+  

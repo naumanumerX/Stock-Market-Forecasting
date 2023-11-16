@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import ReactApexChart  from "react-apexcharts";
 import { candleStickOptions } from './CandleStickChartOptions';
 import './CandleStick.css'

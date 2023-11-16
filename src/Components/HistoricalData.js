@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import axios from 'axios';
 import './HistoricalData.css';
 
@@ -32,8 +32,8 @@ const HistoricalData = ({stockSymbol,stockData, setStockData,startDate,customDay
   return (
     <>
     <div className="historical-data-component">
-      <div>Historical data</div>
-     
+      <div>Historical Data : {stockSymbol}</div>
+     {/*  */}
      
       <table>
         <tr>
@@ -44,7 +44,7 @@ const HistoricalData = ({stockSymbol,stockData, setStockData,startDate,customDay
           <th>Close</th>
           <th>Volume</th>
         </tr>
-      {customDays}
+      {/* {customDays} */}
         {stockData && Object.entries(stockData).slice(0,customDays).map(([date, data], index) => (
           <tr key={index}>
             <td>{formatDate(date)}</td>

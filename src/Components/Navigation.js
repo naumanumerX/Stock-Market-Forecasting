@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import {NavLink,Outlet} from 'react-router-dom'
 import "./Navigation.css";
-import HistoricalData from "./HistoricalData";
+
 const Navigation = ({ stockSymbol, setStockSymbol }) => {
   const [stockSymbolValue, setStockSymbolValue] = useState("");
   const handleChange = (e) => {
@@ -34,18 +35,22 @@ const Navigation = ({ stockSymbol, setStockSymbol }) => {
           </button>
         </div>
         <div className="right-section">
-          <a href="/historical-data">Historical Data</a>
-          <a href="/about">About</a>
-          <a href="/charts">Charts</a>
-          <a href="/signup">Sign Up/Login</a>
+          <NavLink to="about">About</NavLink>
+          <NavLink to="charts">Charts</NavLink>
+          <NavLink to="historicalData">Historical Data</NavLink>
+          <NavLink to="signup">User Support /FAQ</NavLink>
+          
         </div>
       </nav>
+      <main>
+        <Outlet/>
+      </main>
       <h3
         style={{
           textTransform: "uppercase",
         }}
       >
-        {stockSymbol}
+        {/* {stockSymbol} */}
       </h3>
     </>
   );

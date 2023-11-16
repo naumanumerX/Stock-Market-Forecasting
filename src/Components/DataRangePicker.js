@@ -1,7 +1,7 @@
 import React from 'react'
 import { useEffect,useState,useRef } from 'react'
 
-import { addDays } from 'date-fns'
+
 import {DateRange} from 'react-date-range'
 import format from 'date-fns/format'
 import 'react-date-range/dist/styles.css'; // main style file
@@ -26,8 +26,8 @@ const DataRangePicker = ({range,setRange}) => {
         
     return (
         <>
-        <h1>Date Range Picker</h1>
-        
+        {/* <h1>Date Range Picker</h1> */}
+        <h3>Data Date Range Picker</h3>
         <div className="calendarWrap">
             <input 
           //  value={`${format(range[0].startDate,"MM/dd/yyyy")} -${format(range[0].endDate,"MM/dd/yyyy")}`}
@@ -39,18 +39,21 @@ const DataRangePicker = ({range,setRange}) => {
             />
 
 <div ref={refone}>
+    <div className="test">
     {open && (
         <DateRange
             onChange={item => setRange([item.selection])}
             editableDateInputs={false}
             moveRangeOnFirstSelection={false}
             ranges={range}
-            months={1}
+            months={2}
             direction='horizontal'
             className='calenderElement'
         />
     )}
+    </div>
 </div>
+
         </div>
         
         

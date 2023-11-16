@@ -9,7 +9,7 @@ export const candleStickOptions=(stockSymbol)=>{
       type: 'candlestick'
     },
     title: {
-      text: `CandleStick Chart - ${stockSymbol}`,
+      text: `CandleStick Chart -LLOY`,
       align: 'left'
     },
     annotations: {
