@@ -5,12 +5,12 @@ import CandleStick from './Components/CandleStick';
 import { useState,useEffect } from 'react';
 import DataRangePicker from './Components/DataRangePicker';
 
-import About from './Components/About';
+
 import { addDays ,differenceInDays} from 'date-fns'
 import { RouterProvider, createBrowserRouter, createRoutesFromElements,Route } from 'react-router-dom';
 
-
-
+import About from './About/About';
+import MarketStatus from './Components/MarketStatus';
 
  function App() {
   
@@ -62,11 +62,15 @@ const router=createBrowserRouter(
        </>
       }
         />
+           <Route  path="about"  stockSymbol={stockSymbol}  element={<About/>}/> 
+  
       
      
       </Route>
   )
 )
+
+
 
   return (
 
@@ -75,7 +79,7 @@ const router=createBrowserRouter(
      
       {/* <Navigation></Navigation> */}
       {/* <Navigation  stockSymbol={stockSymbol} setStockSymbol={setStockSymbol} /> */}
-      <marquee behavior="" direction="">Market closed - opens at 08:00 on 13 November</marquee>
+     <MarketStatus />
       <RouterProvider router={router}  /> 
 
       
