@@ -32,7 +32,7 @@ const MarketStatus = () => {
       }
       else if(currentDate==5&&time>=17){
         status=false;
-        openDate+=2;
+        openDate+=3;
       }
       else{
         openDate+=0;
