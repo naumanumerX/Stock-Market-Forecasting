@@ -5,7 +5,7 @@ import CandleStick from './Components/CandleStick';
 import { useState,useEffect } from 'react';
 import DataRangePicker from './Components/DataRangePicker';
 
-
+import HotStocks from './HotStocks/HotStocks';
 import { addDays ,differenceInDays} from 'date-fns'
 import { RouterProvider, createBrowserRouter, createRoutesFromElements,Route } from 'react-router-dom';
 
@@ -18,6 +18,7 @@ import MarketStatus from './Components/MarketStatus';
   const [stockSymbol,setStockSymbol]=useState('BARC');
 
   const [stockData, setStockData] = useState(null);
+  const [hotStocks,setHotStocks]=useState([]);
 
   //for date range
   const [customDays,setCustomDays]=useState(0);
@@ -60,8 +61,7 @@ const router=createBrowserRouter(
       <DataRangePicker range={range} setRange={setRange} />
        <HistoricalData  stockSymbol={stockSymbol} stockData={stockData} setStockData={setStockData} customDays={customDays} />
        </>
-      }
-        />
+      }/>
            <Route  path="about"  stockSymbol={stockSymbol}  element={<About/>}/> 
   
       
@@ -76,7 +76,7 @@ const router=createBrowserRouter(
 
     <>
     <div className="App">
-     
+    
       {/* <Navigation></Navigation> */}
       {/* <Navigation  stockSymbol={stockSymbol} setStockSymbol={setStockSymbol} /> */}
      <MarketStatus />
@@ -89,8 +89,7 @@ const router=createBrowserRouter(
   {customDays} */}
   
   
-
-
+    <HotStocks  />
       
         
     </div>
