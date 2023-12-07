@@ -15,7 +15,7 @@ const callApi = async (hotStocks,setRisers,setFallers) => {
         const promises = hotStocks.map(async (stock) => {
             const { data } = await axios.get(`https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${stock}.LON&outputsize=compact&apikey=${api_key}`);
           // console.log(data)
-            console.log( data["Time Series (Daily)"]['2023-11-23']["4. close"]);
+         //   console.log( data["Time Series (Daily)"]['2023-11-23']["4. close"]);
             return {
                 stock,
                 currentDay: data["Time Series (Daily)"]["2023-11-24"]["4. close"],
@@ -37,11 +37,16 @@ const callApi = async (hotStocks,setRisers,setFallers) => {
             temp = 0;
         });
 
+        console.log("Risers hee", Risers);
+        console.log("Fallers hee", Fallers);
+
         setRisers(Risers);
         setFallers(Fallers);
 
-        console.log("Risers", Risers);
-        console.log("Fallers", Fallers);
+        // setLS((prev)=>[...prev,Risers])
+        // setLS((prev)=>[...prev,Fallers])
+
+        
     } catch (error) {
         console.error("Error fetching data:", error);
     }
@@ -61,6 +66,8 @@ const HotStocks = () => {
     const [risers,setRisers]=useState([]);
     const [fallers,setFallers]=useState([])
 
+    //const [lS,setLS]=useState([])
+
    
     useEffect(()=>{
 
@@ -71,51 +78,73 @@ const HotStocks = () => {
 
     
 
-  return (
-    <div>
-<h5>Hot Stocks</h5>
-
-
- <Tab.Group>
-      <Tab.List>
-        <Tab>Risers</Tab>
-        <Tab>Fallers</Tab>
-        
-      </Tab.List>
-      <Tab.Panels>
-        <Tab.Panel >
-          <div className="rounded-md bg-blue text-white"> // this is not
-
-        
-            {
-                risers.map((data,index)=>(
-                    <p key={index}>
-                        {data.stock }:{data.value}
-                    </p>
-                    
-                ))
-            }
-            </div>
-        </Tab.Panel>
-        <Tab.Panel>
-            {
-                fallers.map((data,index)=>(
-                    <p key={index}>
-                        {data.stock }:{data.value}
-                    </p>
-                    
-                ))
-            }
-        </Tab.Panel>
-      </Tab.Panels>
-    </Tab.Group> 
-   
-
-
+    return (
+        <div className="flex justify-end">
+      <div className="p-4">
+        <h5>Hot Stocks</h5>
+        <Tab.Group>
+          <Tab.List>
+            <Tab as={Fragment}>
+              {({ selected }) => (
+                <button
+                  className={selected ? 'bg-blue-500 text-white p-2 rounded-md' : 'bg-white text-black p-2 rounded-md'}
+                >
+                  Risers
+                </button>
+              )}
+            </Tab>
+            <Tab as={Fragment}>
+              {({ selected }) => (
+                <button
+                  className={selected ? 'bg-blue-500 text-white p-2 rounded-md' : 'bg-white text-black p-2 rounded-md'}
+                >
+                  Fallers
+                </button>
+              )}
+            </Tab>
+          </Tab.List>
+          <Tab.Panels>
+            <Tab.Panel>
+              <table className="table-auto">
+                <thead>
+                  <tr>
+                    <th>Stock</th>
+                    <th>Value</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {risers.map((data, index) => (
+                    <tr key={index}>
+                      <td>{data.stock}</td>
+                      <td>{data.value}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </Tab.Panel>
+            <Tab.Panel>
+              <table className="table-auto">
+                <thead>
+                  <tr>
+                    <th>Stock</th>
+                    <th>Value</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {fallers.map((data, index) => (
+                    <tr key={index}>
+                      <td>{data.stock}</td>
+                      <td>{data.value}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </Tab.Panel>
+          </Tab.Panels>
+        </Tab.Group>
+      </div>
     </div>
-
+      );
+    };
     
-  )
-}
-
-export default HotStocks
+export default React.memo(HotStocks);
