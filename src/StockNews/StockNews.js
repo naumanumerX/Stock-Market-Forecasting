@@ -5,7 +5,7 @@ import "./StockNews.css"
 const StockNews = () => {
   //const api_key = "WVA7522VPWWOJAVA";
   const apiToken="aLirJmDJWupEK98c99PMti07eu4hzjsHvhm0NUhF";
-  const stockSymbol = "AMZN"
+  const stockSymbol = "TSLA,AAPL,AMZN";
   const [news, setNews] = useState([]);
 
   const apiCall = async (stockSymbol, apiToken) => {
@@ -15,14 +15,19 @@ const StockNews = () => {
 
     // console.log(response.data.feed);
 
-    const symbols = "BARC,LLOY,TSCO"; // Replace with the symbols you are interested in
+     // Replace with the symbols you are interested in
 
+    try {
     const response = await axios.get(
-      `https://api.marketaux.com/v1/news/all?api_token=${apiToken}&symbols=${symbols}`
+      `https://api.marketaux.com/v1/news/all?api_token=${apiToken}&symbols=${stockSymbol}`
 
       );
       console.log("news",response.data.data)
     setNews(response.data.data);
+    }
+    catch{
+      console.log("CAnnot feetch news data of this stock")
+    }
   };
 
   useEffect(() => {
@@ -33,6 +38,7 @@ const StockNews = () => {
     <div>
       <h1>Stock news</h1>
       <div className="main">
+        
       {news.map((element) => {
         return (
           <>
@@ -43,7 +49,7 @@ const StockNews = () => {
                 <h5 className="card-title"><b>{element.source}</b></h5>
                 <p className="card-text">
                  {/* {element.summary.split(" ").slice(0,20).join(" ")} */}
-                 {element.description}
+                 {element.description.split(" ").slice(0,20).join(" ")}
                 </p>
                 <a href={element.url} target="_blank" className="btn btn-primary">
                   Read More
