@@ -1,16 +1,20 @@
 import React, { useState } from "react";
 import {NavLink,Outlet} from 'react-router-dom'
 import "./Navigation.css";
+import { useNavigate } from "react-router-dom";
 
 const Navigation = ({ stockSymbol, setStockSymbol }) => {
   const [stockSymbolValue, setStockSymbolValue] = useState("");
-  const handleChange = (e) => {
-    // const newSymbol = e.target.value;
+  const navigate=useNavigate();
 
-    // Use a setTimeout to update the stockSymbol state after a delay
-    // setTimeout(() => {
+  const handleChange = (e) => {
     setStockSymbolValue(e.target.value);
-    // }, 3000);
+  };
+
+  const handleSearch = () => {
+    setStockSymbol(stockSymbolValue);
+    navigate('/historicalData')
+    
   };
 
   return (
@@ -27,11 +31,11 @@ const Navigation = ({ stockSymbol, setStockSymbol }) => {
           />
           <button
             className="search-button"
-            onClick={() => {
-              setStockSymbol(stockSymbolValue);
-            }}
+            onClick={handleSearch}
+            
           >
             Search Stock
+           
           </button>
         </div>
         <div className="right-section">
@@ -39,7 +43,6 @@ const Navigation = ({ stockSymbol, setStockSymbol }) => {
           <NavLink to="charts">Charts</NavLink>
           <NavLink to="historicalData">Historical Data</NavLink>
           <NavLink to="signup">User Support /FAQ</NavLink>
-          
         </div>
       </nav>
       <main>
