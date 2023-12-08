@@ -59,5 +59,9 @@
       margin: 0 10px;
     }
     
+    input {
+      color: black; /* Set the appropriate text color */
+      /* Other styles */
+    }
     /* Add additional styling as needed */
     
