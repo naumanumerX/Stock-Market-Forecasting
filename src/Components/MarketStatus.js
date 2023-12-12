@@ -34,6 +34,9 @@ const MarketStatus = () => {
         status=false;
         openDate+=3;
       }
+      else if(time>=17){
+        openDate+=1;
+      }
       else{
         openDate+=0;
       }
@@ -48,13 +51,12 @@ const MarketStatus = () => {
     
 
     <div>Market Status</div>
-    {!status && (
+    {status && (
         <div className="marquee">
           Market closed - opens at 08:00 on {openDate} {monthName}
         </div>
       )}
-   
-
+     
 
     </div>
   )
