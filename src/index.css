@@ -1,3 +1,9 @@
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 .navbar .right-section a{
 text-decoration: none;
   padding: 6px;
