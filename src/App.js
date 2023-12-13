@@ -8,7 +8,7 @@ import DataRangePicker from './Components/DataRangePicker';
 import HotStocks from './HotStocks/HotStocks';
 import { addDays ,differenceInDays} from 'date-fns'
 import { RouterProvider, createBrowserRouter, createRoutesFromElements,Route } from 'react-router-dom';
-
+import StockNews from './StockNews/StockNews';
 import About from './About/About';
 import MarketStatus from './Components/MarketStatus';
 
@@ -66,7 +66,7 @@ const router=createBrowserRouter(
   
       
      
-      </Route>
+      </Route >
   )
 )
 
@@ -90,6 +90,7 @@ const router=createBrowserRouter(
   
   
     <HotStocks  />
+    <StockNews />
       
         
     </div>
