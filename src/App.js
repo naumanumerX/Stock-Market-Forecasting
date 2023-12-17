@@ -11,6 +11,7 @@ import { RouterProvider, createBrowserRouter, createRoutesFromElements,Route } f
 import StockNews from './StockNews/StockNews';
 import About from './About/About';
 import MarketStatus from './Components/MarketStatus';
+import FAQ from './FAQ/FAQ';
 
  function App() {
   
@@ -63,7 +64,7 @@ const router=createBrowserRouter(
        </>
       }/>
            <Route  path="about"  stockSymbol={stockSymbol}  element={<About/>}/> 
-  
+           <Route  path="FAQ"  stockSymbol={stockSymbol}  element={<FAQ/>}/> 
       
      
       </Route >
