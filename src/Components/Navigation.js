@@ -42,7 +42,7 @@ const Navigation = ({ stockSymbol, setStockSymbol }) => {
           <NavLink to="about">About</NavLink>
           <NavLink to="charts">Charts</NavLink>
           <NavLink to="historicalData">Historical Data</NavLink>
-          <NavLink to="signup">User Support /FAQ</NavLink>
+          <NavLink to="FAQ">User Support /FAQ</NavLink>
         </div>
       </nav>
       <main>
