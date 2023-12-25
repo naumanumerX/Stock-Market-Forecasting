@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useState,useEffect } from 'react';
 import axios from 'axios';
 import './HistoricalData.css';
+
 
 const callApi = async (stockSymbol, api_key, setStockData) => {
   try {
@@ -19,12 +20,30 @@ const formatDate = (rawDate) => {
   const options = { day: 'numeric', month: 'long', year: 'numeric' };
   return date.toLocaleDateString(undefined, options);
 };
-
+const getPRediction=(stockSymbol,setPredictionResult)=>{
+  fetch('http://127.0.0.1:5000/abcd', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ text: stockSymbol }),
+    })
+      .then(response => response.json())
+      .then(data => {
+        // Handle response from Flask
+       // console.log("hello",data.received_text);  // Access the received_text property
+        setPredictionResult(data.ml_result); // Update state with the prediction result
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+}
 const HistoricalData = ({stockSymbol,stockData, setStockData,startDate,customDays=15}) => {
  
   // const stockSymbol = 'LLOY';
   const api_key = 'WVA7522VPWWOJAVA';
-
+  const [predictionResult, setPredictionResult] = useState(""); // New state for prediction result
+ 
   useEffect(() => {
     callApi(stockSymbol, api_key, setStockData);
   }, [stockSymbol,customDays]);
@@ -60,6 +79,19 @@ const HistoricalData = ({stockSymbol,stockData, setStockData,startDate,customDay
 
       </table>
       </div>
+      <div className="container">
+      <button className='btn' onClick={()=>getPRediction(stockSymbol,setPredictionResult)}>Get Prediction</button>
+      </div>
+           
+      {predictionResult && (
+        <div>
+          <h4>Prediction Result:</h4>
+          <p>{predictionResult}</p>
+        </div>
+)}
+
+
+      
     </>
   );
 }
