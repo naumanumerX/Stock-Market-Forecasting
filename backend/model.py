@@ -8,10 +8,10 @@ from statsmodels.tsa.stattools import adfuller
 from statsmodels.tsa.seasonal import seasonal_decompose
 from statsmodels.tsa.statespace.sarimax import SARIMAX
 import asyncio
-
-async def download_stock_data(ticker, start_date, end_date):
+ 
+def download_stock_data(ticker, start_date, end_date):
     loop = asyncio.get_event_loop()
-    df = await loop.run_in_executor(None, lambda: yf.download(ticker, start=start_date, end=end_date, progress=False))
+    df =  loop.run_in_executor(None, lambda: yf.download(ticker, start=start_date, end=end_date, progress=False))
     return df
 
 async def run_ml_algorithm(stock_symbol):
@@ -25,9 +25,19 @@ async def run_ml_algorithm(stock_symbol):
     print("Starting Date is", start_date, "and Ending Date is", end_date)
 
     ticker = stock_symbol+'.L'
+    # stock_info = yf.Ticker(ticker)
+    # company_info = stock_info.info
+    # print("company info", company_info)
     
+    
+    # # Print specific information
+    # print("Company Name:", company_info['longName'])
+    # print("Sector:", company_info['sector'])
+    # print("Industry:", company_info['industry'])
+    # print("Website:", company_info['website'])
+    # print("company infor",stock_info)
     # Make the data download asynchronous
-    df = await download_stock_data(ticker, start_date, end_date)
+    df =  await download_stock_data(ticker, start_date, end_date)
 
     df.head()
     df.insert(0,"Date",df.index,True)
@@ -36,9 +46,9 @@ async def run_ml_algorithm(stock_symbol):
     df=df[['Date','Close']]
     df.tail()
     #ploting the data to see how it looks
-    fig=px.line(df,x='Date',y='Close',title="Barclays Stock Price")
-    fig.show()#checking if the data is stationary or not
-
+    # fig=px.line(df,x='Date',y='Close',title="Barclays Stock Price")
+    # fig.show()#checking if the data is stationary or not
+   
     from statsmodels.tsa.stattools import adfuller
     def adf_test(df):
         result=adfuller(df)
@@ -50,15 +60,16 @@ async def run_ml_algorithm(stock_symbol):
             print("Fail to reject the null hypothesis .Data is not stationary ")
 
     adf_test(df['Close'])
+    
     from statsmodels.tsa.seasonal import seasonal_decompose
     decompose=seasonal_decompose(df['Close'],model="additive",period=30)
-    decompose.plot()
+    # decompose.plot()
     from statsmodels.graphics.tsaplots import plot_acf,plot_pacf
     import matplotlib.pyplot as plt
     fig,axes=plt.subplots(3,2,sharex=True)
     axes[0,0].plot(df["Close"]);axes[0,0].set_title("Original Series")
     # plot_acf(df["Close"],ax=axes[0,1])
-
+  
     #1st differencing
     axes[1,0].plot(df["Close"].diff());axes[1,0].set_title("1st Order differencing ")
     plot_acf(df["Close"].diff().dropna(),ax=axes[1,1])
@@ -66,7 +77,7 @@ async def run_ml_algorithm(stock_symbol):
     #2nd differencing
     axes[2,0].plot(df["Close"].diff().diff());axes[2,0].set_title("2nd Order differencing ")
     # plot_acf(df["Close"].diff().diff().dropna(),ax=axes[2,1])
-
+  
     # plt.show()#find p value 
 
     from statsmodels.graphics.tsaplots import plot_acf,plot_pacf
@@ -85,7 +96,7 @@ async def run_ml_algorithm(stock_symbol):
     # pd.plotting.autocorrelation_plot(df["Close"])
 
     plot_pacf(df["Close"],alpha=0.05)
-    print("line 87")
+    
     from pmdarima.arima import auto_arima
     model=auto_arima(df["Close"],start_p=1,start_q=1,max_p=2,max_q=2,m=12,start_P=0,seasonal=True,d=1,D=1,trace=True,error_action="ignore",suppress_warnings=True)
     # print(model.summary())
@@ -98,8 +109,8 @@ async def run_ml_algorithm(stock_symbol):
     model=model.fit()
     # print(model.summary())
 
-    #predict next 30 days
-    print("+==========line 101==================+")
+    #predict next 2 days
+  
     forecast=model.predict(n_periods=5)
     print("forecast",forecast)
 
@@ -123,7 +134,8 @@ async def run_ml_algorithm(stock_symbol):
     #predict next 30 days
     print(predictions)
     print("prediction is :",predictions)
-    ml_result = f'ML result for stock is  {predictions.values}'
+    ml_result = f' {predictions.values}'
+    # ml_result = f' {company_info}'
 
     
     # plt.figure(figsize=[10,5])
