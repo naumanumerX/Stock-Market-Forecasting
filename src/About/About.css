@@ -1,0 +1,25 @@
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+  
+    
+  }
+  .table{
+    width: 70%;
+    margin: 0 auto;
+  }
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 10px;
+    
+  }
+  
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }
+  
+.historical-data-component {
+  width: 70%;
+  margin: 0 auto;
+}
