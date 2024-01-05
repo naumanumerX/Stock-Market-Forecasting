@@ -4,7 +4,7 @@ import HistoricalData from './Components/HistoricalData';
 import CandleStick from './Components/CandleStick';
 import { useState,useEffect } from 'react';
 import DataRangePicker from './Components/DataRangePicker';
-
+import Slideshow from './Components/Slideshow'
 import HotStocks from './HotStocks/HotStocks';
 import { addDays ,differenceInDays} from 'date-fns'
 import { RouterProvider, createBrowserRouter, createRoutesFromElements,Route } from 'react-router-dom';
@@ -12,7 +12,7 @@ import StockNews from './StockNews/StockNews';
 import About from './About/About';
 import MarketStatus from './Components/MarketStatus';
 import FAQ from './FAQ/FAQ';
-
+import TimeSeriesChart from './Charts/zoomableTimeSeriesData';
  function App() {
   
 
@@ -53,7 +53,15 @@ const router=createBrowserRouter(
     <Route path="/" element={<Navigation stockSymbol={stockSymbol} setStockSymbol={setStockSymbol}/>} >
       
       <Route path="about" element={<About />} />
-      <Route  path="charts" element={<CandleStick  stockData={stockData} customDays={customDays}/>}/> 
+      <Route  path="charts" element={
+      
+      <> <CandleStick  stockData={stockData} customDays={customDays}/>
+      <TimeSeriesChart  stockData={stockData} customDays={customDays} />
+     
+      
+      </>
+      
+      }/> 
   
 
       <Route path="historicalData" element={
@@ -63,7 +71,8 @@ const router=createBrowserRouter(
        <HistoricalData  stockSymbol={stockSymbol} stockData={stockData} setStockData={setStockData} customDays={customDays} />
        </>
       }/>
-           <Route  path="about"  stockSymbol={stockSymbol}  element={<About/>}/> 
+          <Route path="about" element={<About stockSymbol={stockSymbol} />} />
+
            <Route  path="FAQ"  stockSymbol={stockSymbol}  element={<FAQ/>}/> 
       
      
@@ -71,7 +80,7 @@ const router=createBrowserRouter(
   )
 )
 
-
+ 
 
   return (
 
@@ -80,20 +89,25 @@ const router=createBrowserRouter(
     
       {/* <Navigation></Navigation> */}
       {/* <Navigation  stockSymbol={stockSymbol} setStockSymbol={setStockSymbol} /> */}
-     <MarketStatus />
+    
       <RouterProvider router={router}  /> 
-
       
       {/* <h1>App Componenrt renderered</h1> */}
 {/*      
   {stockSymbol}
   {customDays} */}
-  
-  
+{/* <Test/> */}
+
+<MarketStatus />
+
+  <div className="flex-container">
+   <Slideshow />
     <HotStocks  />
+   
+    </div>
+   
     <StockNews />
-      
-        
+   
     </div>
   </>
   );
