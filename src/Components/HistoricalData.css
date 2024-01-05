@@ -18,3 +18,31 @@ table {
   width: 70%;
   margin: 0 auto;
 }
+
+.container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+.btn{
+  display: flex;
+ 
+  align-items: center;
+  padding: 10px;
+  background-color: rgb(59 130 246 );;
+  color: white;
+  margin-top: 30px;
+  border-radius: 10px;
+ 
+}
+
+.btn:hover{
+  display: flex;
+ 
+  align-items: center;
+  padding: 5px;
+  color: white;
+  background-color: rgb(139, 146, 115);
+  border-radius: 10px;
+}
