@@ -1,7 +1,8 @@
 .marquee {
     white-space: nowrap;
     overflow: hidden;
-    animation: marquee 20s linear infinite;
+    width: 100vw;
+    animation: marquee 9000ms linear infinite;
   }
   
   @keyframes marquee {

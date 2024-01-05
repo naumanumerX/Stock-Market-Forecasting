@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import { Tab } from '@headlessui/react'
 import { Fragment } from 'react'
-
+import './HotStock.css'
 let currentDayData=[];
 let lastDayData=[];
 let Risers=[];
@@ -14,12 +14,12 @@ const callApi = async (hotStocks,setRisers,setFallers) => {
     try {
         const promises = hotStocks.map(async (stock) => {
             const { data } = await axios.get(`https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${stock}.LON&outputsize=compact&apikey=${api_key}`);
-          // console.log(data)
+         // console.log(data)
          //   console.log( data["Time Series (Daily)"]['2023-11-23']["4. close"]);
             return {
                 stock,
-                currentDay: data["Time Series (Daily)"]["2023-11-24"]["4. close"],
-                lastDay: data["Time Series (Daily)"]["2023-11-23"]["4. close"],
+                currentDay: data["Time Series (Daily)"]["2023-12-28"]["4. close"],
+                lastDay: data["Time Series (Daily)"]["2023-12-27"]["4. close"],
             };
         });
 
@@ -59,7 +59,7 @@ const HotStocks = () => {
     // 'BARC','SMT','FLTR','RR.','BARC',"HSBA"
     // ];
 
-      const hotStocks=['KGF','OCDO','TSCO','VOD',
+      const hotStocks=['KGF','PHNX','TSCO','VOD','PRU',
     'BARC','SMT','FLTR',"HSBA","SGE","LAND","FCIT","SGRO"
     ];
 
@@ -113,13 +113,13 @@ const HotStocks = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {risers.map((data, index) => (
-                    <tr key={index}>
-                      <td>{data.stock}</td>
-                      <td>{data.value}</td>
-                    </tr>
-                  ))}
-                </tbody>
+                                    {risers.map((data, index) => (
+                                        <tr key={index}>
+                                            <td className="value-cell">{data.stock}</td>
+                                            <td className="value-cell">{data.value}</td>
+                                        </tr>
+                                    ))}
+                                </tbody>
               </table>
             </Tab.Panel>
             <Tab.Panel>
@@ -131,13 +131,13 @@ const HotStocks = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {fallers.map((data, index) => (
-                    <tr key={index}>
-                      <td>{data.stock}</td>
-                      <td>{data.value}</td>
-                    </tr>
-                  ))}
-                </tbody>
+                                    {fallers.map((data, index) => (
+                                        <tr key={index}>
+                                            <td className="value-cell">{data.stock}</td>
+                                            <td className="value-cell">{data.value}</td>
+                                        </tr>
+                                    ))}
+                                </tbody>
               </table>
             </Tab.Panel>
           </Tab.Panels>
